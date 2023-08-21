@@ -12,11 +12,16 @@ function App() {
   const addValue = () => {
     //counter = counter + 1
     setCounter(counter + 1)
+    document.getElementById("remove").disabled = false;
     
   }
 
   const removeValue = () => {
-    setCounter(counter - 1)
+    if(counter <= 0){
+      document.getElementById("remove").disabled = true;
+    }else{
+      setCounter(counter - 1);
+    }
   }
   
   return (
@@ -28,8 +33,9 @@ function App() {
       onClick={addValue}
       >Add value {counter}</button> 
       <br />
+      <br />
       <button
-      onClick={removeValue}
+      onClick={removeValue} id='remove'
       >remove value {counter}</button>
       <p>footer: {counter}</p>
     </>
