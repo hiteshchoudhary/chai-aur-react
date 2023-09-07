@@ -7,6 +7,7 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false)
   const [password, setPassword] = useState("")
+  const [copy, setCopy] = useState(false)
 
   //useRef hook
   const passwordRef = useRef(null)
@@ -29,6 +30,7 @@ function App() {
   }, [length, numberAllowed, charAllowed, setPassword])
 
   const copyPasswordToClipboard = useCallback(() => {
+    setCopy(!copy)
     passwordRef.current?.select();
     passwordRef.current?.setSelectionRange(0, 999);
     window.navigator.clipboard.writeText(password)
@@ -53,7 +55,7 @@ function App() {
         <button
         onClick={copyPasswordToClipboard}
         className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
-        >copy</button>
+        >{copy? "copy" : "Copied!!"}</button>
         
     </div>
     <div className='flex text-sm gap-x-2'>
