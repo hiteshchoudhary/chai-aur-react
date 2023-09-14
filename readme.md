@@ -32,7 +32,24 @@ Welcome to the comprehensive repository dedicated to teaching ReactJS in depth. 
    - [Watch Lesson](https://www.youtube.com/watch?v=yNbnA5pryMg&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=3)
 4. **Create your own react library and JSX**:
    - [Watch Lesson](https://www.youtube.com/watch?v=kAOuj6o7Kxs&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=4)
-
+5. **Why you need hooks and project**:
+   - [Watch Lesson](https://www.youtube.com/watch?v=lI7IIOWM0Mo&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=5)
+6. **Virtual DOM, Fibre and reconciliation**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=MPCVGFvgVEQ&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=6)
+7. **Tailwind and Props in reactjs**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=bB6707XzCNc&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=7)
+8. **A react interview question on counter**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=tOYkV6Yhrhs&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=8)
+9. **Building a react project | bgChanger**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=_lJ3KNMue3w&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=9)
+10. **useEffect, useRef and useCallback with 1 project**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=Lt4vy8hfc-s&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=10)
+11. **Custom hooks in react | currency Project**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=AFDYnd-XPa8&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=11)
+12. **React router crash course**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=VJov5QWEKE4&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=12)
+13. **Context API crash course with 2 projects**:
+    - [Watch Lesson](https://www.youtube.com/watch?v=JQVBGtZMqgU&list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige&index=13)
 ... _(on going series)_
 
 ## 📖 Additional Resources
