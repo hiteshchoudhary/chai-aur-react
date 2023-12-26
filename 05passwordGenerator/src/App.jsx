@@ -14,19 +14,34 @@ function App() {
   const passwordGenerator = useCallback(() => {
     let pass = ""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if (numberAllowed) str += "0123456789"
-    if (charAllowed) str += "!@#$%^&*-_+=[]{}~`"
+    let additionalCharacters = "";
 
-    for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
-      pass += str.charAt(char)
-      
+    if (numberAllowed) {
+      additionalCharacters += "0123456789";
+      pass += "0"; // Ensure at least one number is included
     }
 
-    setPassword(pass)
+    if (charAllowed) {
+      additionalCharacters += "!@#$%^&*-_+=[]{}~`";
+      pass += "!"; // Ensure at least one special character is included
+    }
 
+    const remainingLength = length - pass.length;
 
-  }, [length, numberAllowed, charAllowed, setPassword])
+    for (let i = 1; i <= remainingLength; i++) {
+      let char = Math.floor(Math.random() * str.length);
+      pass += str.charAt(char);
+    }
+
+    for (let i = 1; i <= remainingLength; i++) {
+      let char = Math.floor(Math.random() * additionalCharacters.length);
+      pass += additionalCharacters.charAt(char);
+    }
+
+    pass = pass.split('').sort(() => Math.random() - 0.5).join(''); // Shuffle the password
+
+    setPassword(pass);
+  }, [length, numberAllowed, charAllowed, setPassword]);
 
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select();
