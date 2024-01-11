@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../store/postSlice";
+
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -15,6 +17,7 @@ export default function PostForm({ post }) {
         },
     });
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
@@ -24,7 +27,11 @@ export default function PostForm({ post }) {
 
             if (file) {
                 appwriteService.deleteFile(post.featuredImage);
+                data.featuredImage = file.$id;
+            } else{
+                data.featuredImage = post.featuredImage;
             }
+            delete data.image;
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
@@ -34,17 +41,21 @@ export default function PostForm({ post }) {
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
+            dispatch(updatePost({ post, data }))
         } else {
             const file = await appwriteService.uploadFile(data.image[0]);
 
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
+                delete data.image;
+
                 const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
+                dispatch(createPost({...data, userId : userData.$id, $id: dbPost.$id}))
             }
         }
     };

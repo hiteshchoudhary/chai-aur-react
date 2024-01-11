@@ -5,6 +5,8 @@ import authService from "./appwrite/auth"
 import {login, logout} from "./store/authSlice"
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
+import { setPosts } from './store/postSlice';
+import appwriteService from './appwrite/config';
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -21,6 +23,15 @@ function App() {
     })
     .finally(() => setLoading(false))
   }, [])
+
+    useEffect(() => {
+        appwriteService.getPosts([])
+            .then((data) => {
+                if(data) {
+                    dispatch(setPosts(data.documents))
+                }
+            } )
+    }, [])
   
   return !loading ? (
     <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
