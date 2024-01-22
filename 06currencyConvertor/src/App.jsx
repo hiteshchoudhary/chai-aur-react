@@ -46,7 +46,7 @@ function App() {
                             label="From"
                             amount={amount}
                             currencyOptions={options}
-                            onCurrencyChange={(currency) => setAmount(amount)}
+                             onCurrencyChange={(currency) => setFrom(currency)}
                             selectCurrency={from}
                             onAmountChange={(amount) => setAmount(amount)}
                         />
@@ -73,6 +73,19 @@ function App() {
                     <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
                         Convert {from.toUpperCase()} to {to.toUpperCase()}
                     </button>
+                    <button
+                      type="reset"
+                      className="mt-2 w-full bg-blue-600 text-white px-4 py-3 rounded-lg text-xl font-bold"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setAmount(""); // Reset 'amount' to an empty string
+                        setConvertedAmount(""); // Reset 'convertedAmount' to an empty string
+                        setFrom("usd")
+                        setTo("pkr")
+                      }}
+            >
+              Reset
+            </button>
                 </form>
             </div>
         </div>
