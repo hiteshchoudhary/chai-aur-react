@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
-
+//API link
+//https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json
 
 function useCurrencyInfo(currency){
     const [data, setData] = useState({})
