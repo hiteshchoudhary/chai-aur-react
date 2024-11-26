@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useTodo } from '../contexts/TodoContext';
 
-function TodoForm() {
-    const [todo, setTodo] = useState("")
+const TodoForm = () => {
+
+    const [todo, setTodo] = useState("");
+
     const {addTodo} = useTodo()
 
     const add = (e) => {
-      e.preventDefault()
+        e.preventDefault();
 
-      if (!todo) return
+        if(!todo)  return;
+        
+        addTodo({todo, completed: false})
 
-      addTodo({ todo, completed: false})
-      setTodo("")
+        setTodo("");
+
     }
 
   return (
@@ -23,7 +27,7 @@ function TodoForm() {
               value={todo}
               onChange={(e) => setTodo(e.target.value)}
           />
-          <button type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
+          <button type="submit" className="px-3 py-1 text-white bg-green-600 rounded-r-lg shrink-0">
               Add
           </button>
       </form>

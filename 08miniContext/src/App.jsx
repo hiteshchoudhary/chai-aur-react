@@ -8,11 +8,13 @@ function App() {
   
 
   return (
-    <UserContextProvider>
-      <h1>React with Chai and share is important</h1>
-      <Login />
-      <Profile />
-    </UserContextProvider>
+    <>
+    <h1>React width chai and share is important</h1>
+      <UserContextProvider>
+        <Login />
+        <Profile />
+      </UserContextProvider>
+    </>
   )
 }
 
