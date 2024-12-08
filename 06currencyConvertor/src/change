@@ -1,0 +1,3 @@
+//in app.jsx this should be updated sir
+
+onCurrencyChange={(currency) => setFrom(currency)}
