@@ -3,7 +3,7 @@
 ## api link
 
 ```javascript
-let url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`
+let url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
 
 ```
 
@@ -105,3 +105,100 @@ function App() {
     );
 
 ```
+==============================================================================================================
+# Bonus Fail-safe mechanism for currency api
+To **make fetching api fail-safe** we **wrote a function** for safe fetching api and **used it in our hook.**
+
+## Contents:
+**1. Create function for safe-fetching api defined in our Hook itself.
+2. Implementing in our hook and done. Ps: for use, just copy and paste this code block.**
+
+## 1. Create function for safe-fetching api defined in our Hook itself:
+- **Working:** if primary url (purl) is down then we use a Secondary url (surl)
+```javascript
+
+//=======================custom-function-start==============================
+        async function safeFetch(purl, surl){
+            try{
+                const resp = await fetch(purl);
+                if(!resp.ok) throw new Error (`Fetching from Primary URL ${purl} failed.....`)
+
+                return await resp.json()
+            }
+            catch(e){
+                console.error("Primary URL failed: ",e)
+
+                try{
+                    const resp = await fetch(surl)
+                    if(!resp.ok) throw new Error (`Fetching from Secondary URL ${surl} too failed.....`)
+
+                    console.warn("Working with secondary URL...")
+                    return await resp.json()
+                }
+                catch(e){
+                    console.error("Secondary URL failed: ",e)
+                }
+            }
+        }
+//=======================custom-function-start==============================
+```
+
+## 2. Implementing in our hook and done:
+- **Working:**  Add primary-url and secondary-url in purl and surl respectively and then fetched data.
+- You can just copy and paste this **final code** in hook file useCurrencyInfo.js
+```javascript
+
+    import {useEffect, useState} from "react"
+
+//=======================custom-hook-start====================================
+
+        function useCurrencyInfo(currency){
+             const [data,setData] = useState({})
+                    //to call api
+                    useEffect(() => {
+
+                        //using our custom function safeFetch:
+                        const purl = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
+                        const surl = `https://latest.currency-api.pages.dev/v1/currencies/${currency}.json`
+
+                        safeFetch(purl,surl).then((res) => setData(res[currency]))
+
+                        console.log(data)
+
+                    },[currency])
+
+                    console.log(data)
+
+                    return data;
+                }
+
+        export default useCurrencyInfo;
+//=======================custom-hook-end=====================================
+
+//=======================custom-function-start==============================
+        async function safeFetch(purl, surl){
+            try{
+                const resp = await fetch(purl);
+                if(!resp.ok) throw new Error (`Fetching from Primary URL ${purl} failed.....`)
+
+                return await resp.json()
+            }
+            catch(e){
+                console.error("Primary URL failed: ",e)
+
+                try{
+                    const resp = await fetch(surl)
+                    if(!resp.ok) throw new Error (`Fetching from Secondary URL ${surl} too failed.....`)
+
+                    console.warn("Working with secondary URL...")
+                    return await resp.json()
+                }
+                catch(e){
+                    console.error("Secondary URL failed: ",e)
+                }
+            }
+        }
+//=======================custom-function-end==============================
+
+```
+
