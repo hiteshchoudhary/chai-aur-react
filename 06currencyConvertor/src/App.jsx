@@ -25,6 +25,14 @@ function App() {
     setConvertedAmount(amount * currencyInfo[to])
   }
 
+ const changeAmount = (amount) =>{
+    if(amount<0){
+      setamount(0);
+    }else{
+      setamount(amount)
+    }
+  }
+
   return (
     <div
         className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
@@ -48,7 +56,7 @@ function App() {
                             currencyOptions={options}
                             onCurrencyChange={(currency) => setAmount(amount)}
                             selectCurrency={from}
-                            onAmountChange={(amount) => setAmount(amount)}
+                            onAmountChange={changeAmount}
                         />
                     </div>
                     <div className="relative w-full h-0.5">
