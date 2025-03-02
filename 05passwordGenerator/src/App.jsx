@@ -1,11 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-
-
-
 function App() {
   const [length, setLength] = useState(8)
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false)
+  const [color, setColor] = useState("black");
   const [password, setPassword] = useState("")
 
   //useRef hook
@@ -34,6 +32,10 @@ function App() {
     window.navigator.clipboard.writeText(password)
   }, [password])
 
+  const colorChange = useCallback(() => {
+    setColor((prev) => (prev === "black" ? "red" : "black"));
+  }, []);
+
   useEffect(() => {
     passwordGenerator()
   }, [length, numberAllowed, charAllowed, passwordGenerator])
@@ -51,7 +53,11 @@ function App() {
             ref={passwordRef}
         />
         <button
-        onClick={copyPasswordToClipboard}
+         onClick={() => {
+          copyPasswordToClipboard();
+          colorChange();
+        }}
+        style={{ color: color }}
         className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
         >copy</button>
         
