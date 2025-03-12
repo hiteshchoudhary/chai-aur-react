@@ -11,21 +11,109 @@ function App() {
   //useRef hook
   const passwordRef = useRef(null)
 
-  const passwordGenerator = useCallback(() => {
-    let pass = ""
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if (numberAllowed) str += "0123456789"
-    if (charAllowed) str += "!@#$%^&*-_+=[]{}~`"
+  // random number generator
 
-    for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
-      pass += str.charAt(char)
-      
+  function getRandomExcluding(min, max, excludes) {
+    let num;
+    do {
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+    } while (excludes.includes(num)); // Keep looping if num is in the exclude list
+    return num;
+  }
+
+const passwordGenerator = useCallback(() => {
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if (numberAllowed) str += "0123456789";
+    if (charAllowed) str += "!@#$%^&*_-+=[]{}~`";
+    
+    if (numberAllowed && charAllowed) {
+        let saprator1 = getRandomExcluding(1,6,[]);
+        let numIdx = getRandomExcluding(52, 61, []);
+        let charIdx = getRandomExcluding(62, 79, []);
+        if(saprator1 === 1){
+            pass += str.charAt(numIdx);
+            pass += str.charAt(charIdx);
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+        }else if(saprator1===2){
+            pass += str.charAt(numIdx);
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(charIdx);
+        }else if(saprator1===3){
+            pass += str.charAt(charIdx);
+            pass += str.charAt(numIdx);
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+        }else if(saprator1===4){
+            pass += str.charAt(charIdx);
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(numIdx);
+        }else if(saprator1===5){
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(numIdx);
+            pass += str.charAt(charIdx);
+        }else if(saprator1===6){
+            for(let i = 1;i<=(length-2);i++){
+                let strIdx = getRandomExcluding(0,79,[numIdx,charIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(charIdx);
+            pass += str.charAt(numIdx);
+        }
+    }else if(numberAllowed && !charAllowed) {
+        let numIdx = getRandomExcluding(52, 61, []);
+        let saprator1 = getRandomExcluding(1,2,[]);
+        if(saprator1 === 1){
+            pass += str.charAt(numIdx);
+            for(let i = 1;i<=(length-1);i++){
+                let strIdx = getRandomExcluding(0,61,[numIdx]);
+                pass += str.charAt(strIdx);
+            }
+        }else if(saprator1 === 2){
+            for(let i = 1;i<=(length-1);i++){
+                let strIdx = getRandomExcluding(0,61,[numIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(numIdx);
+        }
+    }else if(!numberAllowed && charAllowed){
+        let charIdx = getRandomExcluding(52,69,[]);
+        let saprator1 = getRandomExcluding(1,2,[]);
+        if(saprator1 === 1){
+            pass += str.charAt(charIdx);
+            for(let i = 1;i<=(length-1);i++){
+                let strIdx = getRandomExcluding(0,69,[charIdx]);
+                pass += str.charAt(strIdx);
+            }
+        }else if(saprator1 === 2){
+            for(let i = 1;i<=(length-1);i++){
+                let strIdx = getRandomExcluding(0,69,[charIdx]);
+                pass += str.charAt(strIdx);
+            }
+            pass += str.charAt(charIdx);
+        }
+    }else{
+        for(let i = 1;i<=(length);i++){
+            let strIdx = getRandomExcluding(0,51,[]);
+            pass += str.charAt(strIdx);
+        }
     }
 
-    setPassword(pass)
-
-
+    setPassword(pass);
   }, [length, numberAllowed, charAllowed, setPassword])
 
   const copyPasswordToClipboard = useCallback(() => {
