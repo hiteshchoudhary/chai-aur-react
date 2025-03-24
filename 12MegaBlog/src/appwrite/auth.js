@@ -30,7 +30,7 @@ export class AuthService {
 
     async login({email, password}) {
         try {
-            return await this.account.createEmailSession(email, password);
+            return await this.account.createEmailSession(email, password);//if you are using the updated version of appwrite ^17.0.1 this method will give issue use "createEmailPasswordSession()"
         } catch (error) {
             throw error;
         }
