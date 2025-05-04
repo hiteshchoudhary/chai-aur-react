@@ -123,21 +123,12 @@ export default function Card() {
 ## remember to change config in tailwind
 
 ```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: "class",
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+/** @custom-variant dark (&:where(.dark, .dark *)); */
+//in index.css file
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 
 
 
 ```
-
