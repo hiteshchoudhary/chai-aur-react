@@ -1,0 +1,41 @@
+{
+  "name": "appwrite",
+  "homepage": "https://appwrite.io/support",
+  "description": "Appwrite is an open-source self-hosted backend server that abstract and simplify complex and repetitive development tasks behind a very simple REST API",
+  "version": "13.0.2",
+  "license": "BSD-3-Clause",
+  "main": "dist/cjs/sdk.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/sdk.js",
+      "require": "./dist/cjs/sdk.js",
+      "types": "./types/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "module": "dist/esm/sdk.js",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appwrite/sdk-for-web"
+  },
+  "scripts": {
+    "build": "npm run build:types && npm run build:libs",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir types",
+    "build:libs": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "8.3.2",
+    "playwright": "1.15.0",
+    "rollup": "2.75.4",
+    "serve-handler": "6.1.0",
+    "tslib": "2.4.0",
+    "typescript": "4.7.2"
+  },
+  "dependencies": {
+    "cross-fetch": "3.1.5",
+    "isomorphic-form-data": "2.0.0"
+  },
+  "jsdelivr": "dist/iife/sdk.js",
+  "unpkg": "dist/iife/sdk.js"
+}

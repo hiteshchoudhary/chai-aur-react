@@ -1,0 +1,75 @@
+{
+  "name": "style-to-object",
+  "version": "0.4.2",
+  "description": "Converts inline style to object.",
+  "author": "Mark <mark@remarkablemark.org>",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "module": "index.mjs",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
+  "scripts": {
+    "build": "run-s build:*",
+    "build:min": "NODE_ENV=production rollup --config --file dist/style-to-object.min.js --sourcemap",
+    "build:unmin": "NODE_ENV=development rollup --config --file dist/style-to-object.js",
+    "clean": "rm -rf dist",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:dts": "dtslint .",
+    "_postinstall": "husky install",
+    "postpublish": "pinst --enable",
+    "prepublishOnly": "pinst --disable && run-s lint lint:dts test clean build",
+    "test": "mocha --exclude **/*.mjs",
+    "test:coverage": "nyc npm test",
+    "test:module": "node --experimental-modules test/index.mjs",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remarkablemark/style-to-object"
+  },
+  "bugs": {
+    "url": "https://github.com/remarkablemark/style-to-object/issues"
+  },
+  "keywords": [
+    "style-to-object",
+    "inline",
+    "style",
+    "parser",
+    "css",
+    "object",
+    "pojo"
+  ],
+  "dependencies": {
+    "inline-style-parser": "0.1.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.6.7",
+    "@commitlint/config-conventional": "17.6.7",
+    "@rollup/plugin-commonjs": "25.0.3",
+    "@rollup/plugin-node-resolve": "15.1.0",
+    "@rollup/plugin-terser": "0.4.3",
+    "dtslint": "4.2.1",
+    "eslint": "8.46.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.3",
+    "mocha": "10.2.0",
+    "npm-run-all": "4.1.5",
+    "nyc": "15.1.0",
+    "pinst": "3.0.0",
+    "prettier": "3.0.0",
+    "rollup": "2.79.1",
+    "typescript": "5.1.6"
+  },
+  "files": [
+    "/dist",
+    "index.d.ts",
+    "index.js",
+    "index.mjs"
+  ],
+  "license": "MIT"
+}

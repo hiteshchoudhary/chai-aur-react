@@ -1,0 +1,49 @@
+{
+  "name": "react-property",
+  "version": "2.0.0",
+  "description": "HTML and SVG DOM property configs used by React.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.possibleStandardNames.js && scripts/build.js && rollup -c",
+    "clean": "rm -rf lib",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepublishOnly": "npm run lint && npm run clean && npm run build && npm test",
+    "test": "jest --coverage --ci",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remarkablemark/react-dom-core"
+  },
+  "bugs": {
+    "url": "https://github.com/remarkablemark/react-dom-core/issues"
+  },
+  "keywords": [
+    "react-property",
+    "html",
+    "svg",
+    "dom",
+    "property",
+    "attribute",
+    "config",
+    "react",
+    "react-dom"
+  ],
+  "files": [
+    "/lib"
+  ],
+  "devDependencies": {
+    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-flow": "^7.14.5",
+    "@rollup/plugin-alias": "^3.1.5",
+    "@rollup/plugin-babel": "^5.3.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.1.0",
+    "prettier": "^2.3.2",
+    "rollup": "^2.56.3"
+  },
+  "license": "MIT",
+  "gitHead": "1637f549753213cc85dbcad168c48c49e11a0339"
+}
