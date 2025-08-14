@@ -141,3 +141,10 @@ export default {
 
 ```
 
+## in the new version of tailwind css add this to your index.css to enable toggle themeBtn
+
+```css
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+```
