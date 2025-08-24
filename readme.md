@@ -14,10 +14,15 @@ Welcome to the comprehensive repository dedicated to teaching ReactJS in depth. 
    ```bash
    git clone https://github.com/hiteshchoudhary/chai-aur-react.git
    ```
+2. Install dependencies
+   ```bash
+   cd chai-aur-react
+   npm install
+   ```
 
-2. Navigate to each project folder and follow the instructions in the respective README to set up and run the project.
+3. Navigate to each project folder and follow the instructions in the respective README to set up and run the project.
 
-3. Parallelly, watch the video lessons on the ["chai aur code" YouTube channel](https://www.youtube.com/channel/UCNQ6FEtztATuaVhZKCY28Yw) for a detailed walk-through.
+4. Parallelly, watch the video lessons on the ["chai aur code" YouTube channel](https://www.youtube.com/channel/UCNQ6FEtztATuaVhZKCY28Yw) for a detailed walk-through.
 
 ## 📚 Modules & Projects
 
