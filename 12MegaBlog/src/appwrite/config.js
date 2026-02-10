@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js';
-import { Client, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage, Query , TablesDB} from "appwrite";
 
 export class Service{
     client = new Client();
@@ -10,13 +10,13 @@ export class Service{
         this.client
         .setEndpoint(conf.appwriteUrl)
         .setProject(conf.appwriteProjectId);
-        this.databases = new Databases(this.client);
+        this.databases = new TablesDB(this.client);
         this.bucket = new Storage(this.client);
     }
 
     async createPost({title, slug, content, featuredImage, status, userId}){
         try {
-            return await this.databases.createDocument(
+            return await this.databases.createRow(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -35,7 +35,7 @@ export class Service{
 
     async updatePost(slug, {title, content, featuredImage, status}){
         try {
-            return await this.databases.updateDocument(
+            return await this.databases.updateRow(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -54,7 +54,7 @@ export class Service{
 
     async deletePost(slug){
         try {
-            await this.databases.deleteDocument(
+            await this.databases.deleteRow(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
@@ -69,7 +69,7 @@ export class Service{
 
     async getPost(slug){
         try {
-            return await this.databases.getDocument(
+            return await this.databases.getRow(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
@@ -83,7 +83,7 @@ export class Service{
 
     async getPosts(queries = [Query.equal("status", "active")]){
         try {
-            return await this.databases.listDocuments(
+            return await this.databases.listRows(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 queries,
