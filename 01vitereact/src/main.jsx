@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App.jsx'
+import '../src/App.css'
 
 function MyApp(){
     return (
@@ -30,7 +31,7 @@ const anotherUser = "chai aur react"
 
 const reactElement = React.createElement(
     'a',
-    {href: 'https://google.com',target: '_blank' },
+    {href: 'https://google.com',target: '_blank',style: { marginTop: '15px' } },
     'click me to visit google',
     anotherElement
 )
